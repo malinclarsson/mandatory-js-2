@@ -15,11 +15,29 @@ h1 {
   line-height: 20px;
 }
 /*------ scoreboard ------*/
-
+.scoreboard {
+  color: white;
+  width: 100%;
+  margin-top: 5px;
+  margin-left: 30%;
+  margin-right: 30%;
+  border: solid 2px lightblue;
+  padding: 2px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+/*------ choose a player ------*/
+.choose {
+  color: white;
+  width: 100%;
+  margin-top: 5px;
+  display: flex;
+  justify-content: center;
+}
 /*------ message ------*/
 h2 {
   color: white;
-  display: none;
 }
 
 /*------ container ------*/
@@ -27,7 +45,6 @@ h2 {
   width: 360px;
   height: 360px;
   margin-top: 50px;
-  margin-bottom: 10px;
   border-radius: 4px;
   display: flex;
   flex-wrap: wrap;
@@ -61,7 +78,7 @@ input:hover {
   border-bottom: none;
 }
 /*------ reset-button ------*/
-#newGame {
+button {
   font-size: 30px;
   margin: 5%;
   width: auto;

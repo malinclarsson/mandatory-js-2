@@ -1,143 +1,109 @@
-//---  gaming board ---//  //behöver jag göra en för X/röd och en för O/blå?
-let A1 = $('#A1');
-let A2 = $('#A2');
-let A3 = $('#A3');
-let B1 = $('#B1');
-let B2 = $('#B2');
-let B3 = $('#B3');
-let C1 = $('#C1');
-let C2 = $('#C2');
-let C3 = $('#C3');
+//======== deklarera variabler ========//
+let board = $(".container");
+let a1 = $('#A1');
+let a2 = $('#A2');
+let a3 = $('#A3');
+let b1 = $('#B1');
+let b2 = $('#B2');
+let b3 = $('#B3');
+let c1 = $('#C1');
+let c2 = $('#C2');
+let c3 = $('#C3');
 
+let turns = 0;
+let winner = false;
 
-//---  scoreboard ---//  <-- fix below
-let playerOne = document.querySelector('#playerOne');
-let playerTwo = document.querySelector('#playerTwo');
+let playerOne = $('#playerOne');
+let playerOneScore = 0;
+let playerTwo = $('#playerTwo');
+let playerTwoScore = 0;
+let player = "player1";
 
-//--- who starts? ---//
-function whoStarts() {
-  let chooseX = document.querySelector('#chooseX');
-  let chooseO = document.querySelector('#chooseO');
+let clicked;
+let message = $("h2");
+let reset = $("#restartButton");
 
-  if (chooseX !== undefined) { // om X kryssas i
-      chooseX = true; // red // X börjar
-      chooseO = false; // blue
+//======== loopa igenom alla knappar. OM de trycks på...  ========//
+$(".container > input").on("click", addMarker);
 
-  } else (chooseO !== undefined); { //Om O kryssas i
-      chooseO = true; // blue // O startar
-      chooseX = false; // red
-    }
-}
-//--- players turn ---//
-function checkIfBox(e) {
-let box = e.target;
+//======== OM det är Player 1s tur (och OM rutan är tom) ========//
+function addMarker(e){
+ if (winner !== "true" && turns < 9) {
+  clicked = e.target;
+  message.text("");
 
-  if (playerOneTurn === true){ // om det är X's tur
-    if (e.target === undefined) { // är boxen tom?
-      box.textcontent = "X"; // placera ett X
-      playerOneTurn = false; // inte längre Player One's tur
-      playerTwoTurn = true; // Player Two's tur
-    } else (e.target !== undefined); {
-      // do nothing
-    }
-  } else if (playerTwoTurn === true){ // om det är O's tur
-    if (e.target === undefined) { // om boxen är tom?
-      box.textcontent = "O"; // placera ett O
-      playerTwoTurn = false; // inte längre Player Two's tur
-      playerOneTurn = true; // Player One's tur
-    } else (e.target !== undefined);{
-      // do nothing
-    }
+  if (clicked.value !=="O" && clicked.value !=="X") {
+
+   if (player === "player1"){
+    clicked.value = "X";
+    player = "player2"; // HÄR
+    console.log("X");
+    turns++;
+    checkWinner();
+   }
+   //======== OM det är Player 2s tur (och rutan är tom) ========//
+   else if (player === "player2"){
+    clicked.value = "O";
+    player = "player1";
+    turns++;
+    console.log("O");
+    checkWinner();
+   }
+   //======== OM det har gått 9 drag utan en vinnare = oavgjort ========//
+   if (turns === 9 && winner === false) { //kollar det blev oavgjort
+    winner.textContent = "TIE";
+    console.log("TIE");
+   }
   }
+ }
 }
 
+//======== winning combos  ========//
+function checkWinner() {
+ if( a1.val() ==="X" && a2.val() ==="X" && a3.val() === "X"
+    || b1.val() ==="X" && b2.val() ==="X" && b3.val() ==="X"
+    || c1.val() ==="X" && c2.val() ==="X" && c3.val() ==="X"
+    || a1.val() ==="X" && b1.val() ==="X" && c1.val() ==="X"
+    || a2.val() ==="X" && b2.val() ==="X" && c2.val() ==="X"
+    || a3.val() ==="X" && b3.val() ==="X" && c3.val() ==="X"
+    || a1.val() ==="X" && b2.val() ==="X" && c3.val() ==="X"
+    || a3.val() ==="X" && b2.val() ==="X" && c1.val() ==="X") {
+  console.log("Winner 1");
+  message.text("WINNER: Player One!");
+  turns = 9;
+  winner = true;
+  playerOneScore++;
+  playerOne.text(playerOneScore);
 
-//---  combinations ---//  <-- fix below
-//- X = red -//
-let redWin1 = $("#A1.red, #A2.red, #A3.red").length === 3;
-/* [X][X][X]
-   [ ][ ][ ]
-   [ ][ ][ ] */
-let redWin2 = $("#B1.red, #B2.red, #B3.red").length === 3;
-/* [ ][ ][ ]
-   [X][X][X]
-   [ ][ ][ ] */
-let redWin3 = $("#C1.red, #C2.red, #C3.red").length === 3;
-/* [ ][ ][ ]
-   [ ][ ][ ]
-   [X][X][X] */
-let redWin4 = $("#A1.red, #B1.red, #C1.red").length === 3;
-/* [X][ ][ ]
-   [X][ ][ ]
-   [X][ ][ ] */
-let redWin5 = $("#A2.red, #B2.red, #C2.red").length === 3;
-/* [ ][X][ ]
-   [ ][X][ ]
-   [ ][X][ ] */
-let redWin6 = $("#A3.red, #B3.red, #C3.red").length === 3;
-/* [ ][ ][X]
-   [ ][ ][X]
-   [ ][ ][X] */
-let redWin7 = $("#A3.red, #B2.red, #C1.red").length === 3;
-/* [ ][ ][X]
-   [ ][X][ ]
-   [X][ ][ ] */
-let redWin8 = $("#A1.red, #B2.red, #C3.red").length === 3;
-/* [X][ ][ ]
-   [ ][X][ ]
-   [ ][ ][X] */
-
-//- O = blue -//
-let blueWin1 = $("#A1.blue, #A2.blue, #A3.blue").length === 3;
-/* [X][X][X]
-   [ ][ ][ ]
-   [ ][ ][ ] */
-let blueWin2 = $("#B1.blue, #B2.blue, #B3.blue").length === 3;
-/* [ ][ ][ ]
-   [X][X][X]
-   [ ][ ][ ] */
-let blueWin3 = $("#C1.blue, #C2.blue, #C3.blue").length === 3;
-/* [ ][ ][ ]
-   [ ][ ][ ]
-   [X][X][X] */
-let blueWin4 = $("#A1.blue, #B1.blue, #C1seven.blue").length === 3;
-/* [X][ ][ ]
-   [X][ ][ ]
-   [X][ ][ ] */
-let blueWin5 = $("#A2.blue, #B2.blue, #C2.blue").length === 3;
-/* [ ][X][ ]
-   [ ][X][ ]
-   [ ][X][ ] */
-let blueWin6 = $("#A3.blue, #B3.blue, #C3.blue").length === 3;
-/* [ ][ ][X]
-   [ ][ ][X]
-   [ ][ ][X] */
-let blueWin7 = $("#A3.blue, #B2.blue, #C1.blue").length === 3;
-/* [ ][ ][X]
-   [ ][X][ ]
-   [X][ ][ ] */
-let blueWin8 = $("#A1.blue, #B2.blue, #C3.blue").length === 3;
-/* [X][ ][ ]
-   [ ][X][ ]
-   [ ][ ][X] */
-
-//--- message (WINNER / TIE) ---//
-let message = document.querySelector('h2'); // WINNER! / TIE!
-let redWinner;
-redWinner.textcontent = ("WINNER: Player One!");
-let blueWinner;
-blueWinner.textcontent = ("WINNER: Player Two!");
-let noWinner;
-noWinner.textcontent = ("TIE");
-
-function winnerMSG() { // denna poppar upp när spelet är slut
-  if (redWinner === redWin1 || redWin2 || redWin3 || redWin4 || redWin5 || redWin6 || redWin7 || redWin8) {
-      message = redWinner;
-    } else if (blueWinner === blueWin1 || blueWin2 || blueWin2 || blueWin3 ||  blueWin4 || blueWin5 || blueWin6 || blueWin7 || blueWin8) {
-      message = redWinner;
-    } else {
-      message = noWinner;
-    }
+ } else if (a1.val()==="O" && a2.val()==="O" && a3.val()==="O"
+            || b1.val()==="O" && b2.val()==="O" && b3.val()==="O"
+            || c1.val()==="O" && c2.val()==="O" && c3.val()==="O"
+            || a1.val()==="O" && b1.val()==="O" && c1.val()==="O"
+            || a2.val()==="O" && b2.val()==="O" && c2.val()==="O"
+            || a3.val()==="O" && b3.val()==="O" && c3.val()==="O"
+            || a1.val()==="O" && b2.val()==="O" && c3.val()==="O"
+            || a3.val()==="O" && b2.val()==="O" && c1.val()==="O") {
+  console.log("Winner 2");
+  message.text("WINNER: Player Two!");
+  turns = 9;
+  winner = true;
+  playerTwoScore++;
+  playerTwo.text(playerTwoScore);
+ }
 }
-//--- new game ---//
-let newGame = document.querySelector('#newGame'); // reseta spelet, och lägg till i scoreboard
+
+//======== töm brädet och starta om ========//
+function resetBoard() {
+ let inputs = $(".container > input");
+
+ // Loopa igenom och sätta value till tomt
+ for (let each of inputs) {
+  each.value = "";
+ }
+
+ // Sätta variabler till standard
+ winner = false;
+ turns = 0;
+ player = "player1";
+ message.text("Again?");
+}
