@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="tictactoe.css">
     <link href="https://fonts.googleapis.com/css?family=Galindo" rel="stylesheet">
-    <script src="tictactoe.js" charset="utf-8" defer></script>
+    <script src="mine.js" charset="utf-8" defer></script>
     <script
  src="https://code.jquery.com/jquery-3.3.1.min.js"
  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
@@ -15,37 +15,25 @@
     <!------ title ------>
     <h1>Tic Tac Toe</h1>
 
-    <!------ scoreboard ------>
-    <div class="scoreboard">
-      <h5 id="playerOne">Player One: </h5>
-      <h5 id="playerTwo">Player Two: </h5>
-    </div>
-
-    <!------ choose player ------>
-    <div class="choose">
-    Would you like to be:
-      <input onclick="whoStarts" id="chooseX" type="radio" name="X" value="X">X or
-      <input onclick="whoStarts" id="chooseO" type="radio" name="O" value="O"> O?
-    </div>
-
     <!------ WINNER message ------>
-    <h2 id="message"></h2>
+    <h2></h2>
 
     <!------ game board ------>
     <div class="container">
-      <button onclick="testing();" id="A1" type="button" name="buttonA1" value=""></button>
-      <button onclick="checkIfBox();" id="A2" type="button" name="buttonA2" value=""></button>
-      <button onclick="checkIfBox();" id="A3" type="button" name="buttonA3" value=""></button>
-      <button onclick="checkIfBox();" id="B1" type="button" name="buttonB1" value=""></button>
-      <button onclick="checkIfBox();" id="B2" type="button" name="buttonB2" value=""></button>
-      <button onclick="checkIfBox();" id="B3" type="button" name="buttonB3" value=""></button>
-      <button onclick="checkIfBox();" id="C1" type="button" name="buttonC1" value=""></button>
-      <button onclick="checkIfBox();" id="C2" type="button" name="buttonC2" value=""></button>
-      <button onclick="checkIfBox();" id="C3" type="button" name="buttonC3" value=""></button>
+
+      <input id="A1" type="button" name="buttonA1" value="">
+      <input id="A2" type="button" name="buttonA2" value="">
+      <input id="A3" type="button" name="buttonA3" value="">
+      <input id="B1" type="button" name="buttonB1" value="">
+      <input id="B2" type="button" name="buttonB2" value="">
+      <input id="B3" type="button" name="buttonB3" value="">
+      <input id="C1" type="button" name="buttonC1" value="">
+      <input id="C2" type="button" name="buttonC2" value="">
+      <input id="C3" type="button" name="buttonC3" value="">
     </div>
 
     <!------ new game-button ------>
-    <button onclick="newGame();" id="newGame" type="button" name="reset">New Game</button>
+    <button onclick="resetGame();" type="button" name="reset">New Game</button>
 
   </body>
 </html>

@@ -1,13 +1,13 @@
 //---  gaming board ---//  //behöver jag göra en för X/röd och en för O/blå?
-let A1 = document.querySelector('#A1');
-let A2 = document.querySelector('#A2');
-let A3 = document.querySelector('#A3');
-let B1 = document.querySelector('#B1');
-let B2 = document.querySelector('#B2');
-let B3 = document.querySelector('#B3');
-let C1 = document.querySelector('#C1');
-let C2 = document.querySelector('#C2');
-let C3 = document.querySelector('#C3');
+let A1 = $('#A1');
+let A2 = $('#A2');
+let A3 = $('#A3');
+let B1 = $('#B1');
+let B2 = $('#B2');
+let B3 = $('#B3');
+let C1 = $('#C1');
+let C2 = $('#C2');
+let C3 = $('#C3');
 
 
 //---  scoreboard ---//  <-- fix below
